@@ -1,0 +1,15 @@
+<svg width="23.085" height="21.09" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <path id="svg_1" fill="#f2f0c9" d="m22.707,16.708a8.359,8.359 0 0 1 -4.467,-7.161c-0.285,-5.557 -3.064,-9.547 -6.7,-9.547s-6.412,3.99 -6.7,9.547a8.359,8.359 0 0 1 -4.465,7.161a0.7,0.7 0 0 0 0.32,1.317l7.105,0c0.023,1.7 1.688,3.064 3.74,3.064s3.716,-1.369 3.739,-3.064l7.105,0a0.7,0.7 0 0 0 0.32,-1.317l0.003,0z"/>
+  <rect id="svg_3" height="0" width="2.667744" y="5.192572" x="2.872333" stroke-width="1.5" stroke="#000" fill="#fff"/>
+  <rect stroke="#000" transform="rotate(42.09292984008789 11.770620346069334,10.698168754577637) " id="svg_4" height="2" width="37.278045" y="9.698169" x="-6.868403" stroke-opacity="null" stroke-width="0" fill="#ce313b"/>
+  <rect id="svg_5" height="0" width="0.652489" y="3.120293" x="7.736502" stroke-opacity="null" stroke-width="1.5" stroke="#000" fill="#ff0000"/>
+  <rect stroke="#000" transform="rotate(42.09292984008789 10.538140296936037,12.293141365051271) " id="svg_6" height="2" width="37.278045" y="11.293142" x="-8.100882" stroke-opacity="null" stroke-width="0" fill="#f2f0c9"/>
+ </g>
+</svg>
