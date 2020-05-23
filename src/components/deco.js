@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 
-const deco = memo(() => {
+const Deco = memo(() => {
   return (
     <>
       <div className="deco1"></div>
@@ -11,4 +11,4 @@ const deco = memo(() => {
   );
 });
 
-export default deco;
+export default Deco;

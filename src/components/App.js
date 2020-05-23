@@ -1,7 +1,8 @@
 import React from "react";
 import Header from "./Header";
-import Deco from "./deco";
+import Deco from "./Deco";
 import AddMission from "./AddMission";
+import Clock from "./Clock";
 
 const App = () => {
   return (
@@ -9,6 +10,11 @@ const App = () => {
       <Deco />
       <Header />
       <AddMission />
+      <Clock
+        countdown={25 * 60}
+        currentMission="Clean up the desk"
+        isBell={true}
+      />
     </div>
   );
 };
