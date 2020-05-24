@@ -8,41 +8,49 @@ import React, {
 import classNames from "classnames";
 
 window.TIMER = null;
-
 const INIT_PROGRESS_VALUE = 1974;
 
-const Clock = ({ initCountdown, currentMission, initIsBell = true } = {}) => {
+const Clock = ({
+  initCountdown,
+  currentMission,
+  initIsBell = true,
+  handleFinishMission,
+  handleSkipMission,
+} = {}) => {
   const [isPlay, setIsPlay] = useState(false);
-  const [isBell, setIsBell] = useState(initIsBell);
-  const [progress, isProgress] = useState(INIT_PROGRESS_VALUE);
-  const [time, setTime] = useState(initCountdown);
-  const refProgressGap = useRef(
+  const [isBell, setIsBell] = useState(true);
+  const [progress, setIsProgress] = useState(INIT_PROGRESS_VALUE);
+  const [time, setTime] = useState(0);
+
+  const progressGapRef = useRef(
     Math.floor(INIT_PROGRESS_VALUE / initCountdown)
   );
+  useEffect(() => {
+    setIsBell(initIsBell);
+    setIsProgress(INIT_PROGRESS_VALUE);
+    setTime(initCountdown);
+    progressGapRef.current = Math.floor(INIT_PROGRESS_VALUE / initCountdown);
+  }, [currentMission]);
 
   useEffect(() => {
     if (isPlay) {
       window.TIMER = setInterval(() => {
         setTime((prevTime) => prevTime - 1);
-        isProgress((prevProgress) => prevProgress - refProgressGap.current);
+        setIsProgress((prevProgress) => prevProgress - progressGapRef.current);
       }, 1 * 1000);
+    } else {
+      clearInterval(window.TIMER);
     }
   }, [isPlay]);
 
   useEffect(() => {
-    if (!isPlay) {
-      clearInterval(window.TIMER);
-    }
-
     if (time === 0) {
       clearInterval(window.TIMER);
       window.TIMER = null;
       setIsPlay(false);
+      handleFinishMission();
+      bell();
     }
-  }, [time, isPlay]);
-
-  const onBtnPlay = useCallback(() => {
-    time > 0 && setIsPlay((prevIsPlay) => !prevIsPlay);
   }, [time]);
 
   const renderBtnPlayClass = useMemo(
@@ -58,14 +66,29 @@ const Clock = ({ initCountdown, currentMission, initIsBell = true } = {}) => {
     () =>
       classNames({
         "btn-play": true,
-        "is-unbell": !isBell,
+        "is-off-bell": !isBell,
       }),
     [isBell]
   );
 
+  const onBtnPlay = useCallback(() => {
+    time > 0 && setIsPlay((prevIsPlay) => !prevIsPlay);
+  }, [time]);
+
   const onBtnBell = useCallback(() => {
     setIsBell((prevIsBell) => !prevIsBell);
   }, []);
+
+  const onBtnSkip = useCallback(() => {
+    clearInterval(window.TIMER);
+    handleSkipMission();
+  }, [handleSkipMission]);
+
+  const bell = useCallback(() => {
+    if (isBell && time === 0) {
+      console.log("isBell! isBell!");
+    }
+  }, [isBell, time]);
 
   const renderProgressStyle = useMemo(() => `${progress}px`, [progress]);
 
@@ -115,7 +138,7 @@ const Clock = ({ initCountdown, currentMission, initIsBell = true } = {}) => {
         <div className="control-bar">
           <div className={renderBtnBellClass} onClick={onBtnBell}></div>
           <div className={renderBtnPlayClass} onClick={onBtnPlay}></div>
-          <div className="btn-skip"></div>
+          <div className="btn-skip" onClick={onBtnSkip}></div>
         </div>
       </div>
     </div>
