@@ -2,11 +2,12 @@
     width: 62px
     height: 62px
     margin: 0 20px
+    border: 1px solid rgba(242, 240, 201, 0.5)
     border-radius: 50%
     transition: all .5s
     cursor: pointer
+    background-size: 35%
     background-repeat: no-repeat
-    background-size: 100%
     &:hover
         background-color: #d9343f
 
@@ -27,7 +28,18 @@
             pointer-events: none
             .clock-cycle-upper-layer
                 fill: none
-                stroke: rbga(242, 240, 201, 0.35)
+                stroke: #f2f0c9
+                stroke-width: 7
+                stroke-linecap: round
+                stroke-miterlimit: 10
+                stroke-dasharray: 1979px
+                stroke-dashoffset: 1979px
+                transform: rotate(-90deg)
+                transform-origin: 318.5px 318.5px
+                transition: stroke-dashoffset 1s
+            .clock-cycle-lower-layer
+                fill: none
+                stroke: rgba(242, 240, 201, 0.35)
                 stroke-width: 7
                 stroke-linecap: round
                 stroke-miterlimit: 10
@@ -53,12 +65,19 @@
 
             .btn-bell
                 @extend %control-bar-btn
+                background-position: center
                 background-image: url('../images/btn-bell.svg')
+                &.is-unbell
+                    background-image: url('../images/btn-unbell.svg')
 
             .btn-play
                 @extend %control-bar-btn
+                background-position: center
                 background-image: url('../images/btn-play.svg')
+                &.is-pause
+                    background-image: url('../images/btn-pause.svg')
 
             .btn-skip
                 @extend %control-bar-btn
+                background-position: center
                 background-image: url('../images/btn-skip.svg')

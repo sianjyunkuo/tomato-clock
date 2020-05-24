@@ -11,9 +11,9 @@ const App = () => {
       <Header />
       <AddMission />
       <Clock
-        countdown={25 * 60}
+        InitCountdown={10}
         currentMission="Clean up the desk"
-        isBell={true}
+        initIsBell={true}
       />
     </div>
   );
