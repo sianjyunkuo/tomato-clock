@@ -6,6 +6,7 @@
     border-radius: 50%
     transition: all .5s
     cursor: pointer
+    background-position: center
     background-size: 35%
     background-repeat: no-repeat
     &:hover
@@ -65,19 +66,16 @@
 
             .btn-bell
                 @extend %control-bar-btn
-                background-position: center
                 background-image: url('../images/btn-bell.svg')
                 &.is-unbell
                     background-image: url('../images/btn-unbell.svg')
 
             .btn-play
                 @extend %control-bar-btn
-                background-position: center
                 background-image: url('../images/btn-play.svg')
                 &.is-pause
                     background-image: url('../images/btn-pause.svg')
 
             .btn-skip
                 @extend %control-bar-btn
-                background-position: center
                 background-image: url('../images/btn-skip.svg')
