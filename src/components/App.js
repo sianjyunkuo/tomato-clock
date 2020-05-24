@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from "react";
+import React, { useState, useMemo, useCallback, useRef } from "react";
 import Header from "./Header";
 import Deco from "./Deco";
 import AddMission from "./AddMission";
@@ -10,36 +10,42 @@ import {
 } from "../data";
 
 const App = () => {
-  const [list, setList] = useState(INIT_LIST);
+  // const [list, setList] = useState(INIT_LIST);
+  const listRef = useRef(INIT_LIST);
   const [clockSetting, setClockSetting] = useState(INIT_CLOCK_SETTING);
   const [currentMissionId, setCurrentMissionId] = useState(
     INIT_CURRENT_MISSION_ID
   );
 
   const currentMission = useMemo(() => {
-    return list.find((item) => item.id === currentMissionId);
-  }, [list, currentMissionId]);
+    return listRef.current.find((item) => item.id === currentMissionId);
+  }, [currentMissionId]);
 
-  const handleFinishMission = useCallback(() => {
-    const newList = list.map((item) => {
-      if (item.id === currentMissionId) {
-        item.isFinished = true;
-      }
-      return item;
-    });
-    setList(newList);
-  }, [list, currentMissionId]);
+  const handleFinishMission = useCallback(
+    (isBell) => {
+      const newList = listRef.current.map((item) => {
+        if (item.id === currentMissionId) {
+          item.isFinished = true;
+        }
+        return item;
+      });
+      listRef.current = newList;
+
+      if (isBell) console.log("isBell! is Bell!");
+    },
+    [currentMissionId]
+  );
 
   const handleSkipMission = useCallback(() => {
     const nextMissionId = currentMissionId + 1;
-    const mission = list.find((item) => item.id === nextMissionId);
+    const mission = listRef.current.find((item) => item.id === nextMissionId);
 
     if (mission) {
       setCurrentMissionId((prevMissionId) => prevMissionId + 1);
     } else {
       alert("Wonderful! Today The Missions Have Been Completed!");
     }
-  }, [currentMissionId, list]);
+  }, [currentMissionId]);
 
   return (
     <div className="App">
@@ -49,10 +55,10 @@ const App = () => {
       {currentMission && (
         <Clock
           initCountdown={clockSetting.workingTime}
-          currentMission={currentMission.mission}
+          currentMission={currentMission}
           initIsBell={clockSetting.volume}
-          handleFinishMission={handleFinishMission}
-          handleSkipMission={handleSkipMission}
+          finishMission={handleFinishMission}
+          skipMission={handleSkipMission}
         />
       )}
     </div>

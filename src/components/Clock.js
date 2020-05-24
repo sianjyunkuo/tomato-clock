@@ -1,11 +1,6 @@
-import React, {
-  useCallback,
-  useEffect,
-  useState,
-  useMemo,
-  useRef,
-} from "react";
+import React, { useMemo } from "react";
 import classNames from "classnames";
+import { useClock } from "../hook";
 
 window.TIMER = null;
 const INIT_PROGRESS_VALUE = 1974;
@@ -13,45 +8,28 @@ const INIT_PROGRESS_VALUE = 1974;
 const Clock = ({
   initCountdown,
   currentMission,
-  initIsBell = true,
-  handleFinishMission,
-  handleSkipMission,
+  initIsBell,
+  finishMission,
+  skipMission,
 } = {}) => {
-  const [isPlay, setIsPlay] = useState(false);
-  const [isBell, setIsBell] = useState(true);
-  const [progress, setIsProgress] = useState(INIT_PROGRESS_VALUE);
-  const [time, setTime] = useState(0);
+  const [
+    isPlay,
+    isBell,
+    progress,
+    time,
+    onBtnPlay,
+    onBtnBell,
+    onBtnSkip,
+  ] = useClock({
+    currentMissionId: currentMission.id,
+    initProgressValue: INIT_PROGRESS_VALUE,
 
-  const progressGapRef = useRef(
-    Math.floor(INIT_PROGRESS_VALUE / initCountdown)
-  );
-  useEffect(() => {
-    setIsBell(initIsBell);
-    setIsProgress(INIT_PROGRESS_VALUE);
-    setTime(initCountdown);
-    progressGapRef.current = Math.floor(INIT_PROGRESS_VALUE / initCountdown);
-  }, [currentMission]);
+    initCountdown,
+    initIsBell,
 
-  useEffect(() => {
-    if (isPlay) {
-      window.TIMER = setInterval(() => {
-        setTime((prevTime) => prevTime - 1);
-        setIsProgress((prevProgress) => prevProgress - progressGapRef.current);
-      }, 1 * 1000);
-    } else {
-      clearInterval(window.TIMER);
-    }
-  }, [isPlay]);
-
-  useEffect(() => {
-    if (time === 0) {
-      clearInterval(window.TIMER);
-      window.TIMER = null;
-      setIsPlay(false);
-      handleFinishMission();
-      bell();
-    }
-  }, [time]);
+    skipMission,
+    finishMission,
+  });
 
   const renderBtnPlayClass = useMemo(
     () =>
@@ -70,25 +48,6 @@ const Clock = ({
       }),
     [isBell]
   );
-
-  const onBtnPlay = useCallback(() => {
-    time > 0 && setIsPlay((prevIsPlay) => !prevIsPlay);
-  }, [time]);
-
-  const onBtnBell = useCallback(() => {
-    setIsBell((prevIsBell) => !prevIsBell);
-  }, []);
-
-  const onBtnSkip = useCallback(() => {
-    clearInterval(window.TIMER);
-    handleSkipMission();
-  }, [handleSkipMission]);
-
-  const bell = useCallback(() => {
-    if (isBell && time === 0) {
-      console.log("isBell! isBell!");
-    }
-  }, [isBell, time]);
 
   const renderProgressStyle = useMemo(() => `${progress}px`, [progress]);
 
@@ -134,7 +93,7 @@ const Clock = ({
             r="315"
           ></circle>
         </svg>
-        <h1 className="current-mission">{currentMission}</h1>
+        <h1 className="current-mission">{currentMission.mission}</h1>
         <div className="control-bar">
           <div className={renderBtnBellClass} onClick={onBtnBell}></div>
           <div className={renderBtnPlayClass} onClick={onBtnPlay}></div>
