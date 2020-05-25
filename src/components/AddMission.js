@@ -1,29 +1,20 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useRef, useEffect, memo } from "react";
 
 const AddMission = () => {
   const [newMission, setMission] = useState("");
+  const newMissionRef = useRef();
+
+  useEffect(() => {
+    newMissionRef.current = newMission;
+  });
 
   const handleAddMission = useCallback(() => {
-    const filteredMission = newMission.trim();
+    const filteredMission = newMissionRef.current.trim();
     if (filteredMission) {
-      console.log("filteredMission", filteredMission);
+      console.log("submit new mission", filteredMission);
       setMission("");
     }
-  }, [newMission]);
-
-  const onInputChange = useCallback((e) => {
-    const value = e.target.value;
-    setMission(value);
-  }, []);
-
-  const onInputKeyDown = useCallback(
-    (e) => {
-      if (e.key === "Enter") {
-        handleAddMission();
-      }
-    },
-    [handleAddMission]
-  );
+  }, [newMissionRef]);
 
   return (
     <div className="add-mission">
@@ -32,12 +23,16 @@ const AddMission = () => {
         type="text"
         placeholder="Add a new mission ..."
         value={newMission}
-        onChange={onInputChange}
-        onKeyDown={onInputKeyDown}
+        onChange={(e) => {
+          setMission(e.target.value);
+        }}
+        onKeyDown={(e) => {
+          e.key === "Enter" && handleAddMission();
+        }}
       />
       <div className="btn-add-mission" onClick={handleAddMission}></div>
     </div>
   );
 };
 
-export default AddMission;
+export default memo(AddMission);
