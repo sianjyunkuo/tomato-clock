@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo, memo } from "react";
+import React, { useState, useMemo, memo } from "react";
 import classNames from "classnames";
 
 const Header = () => {
