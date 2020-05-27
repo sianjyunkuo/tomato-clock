@@ -1,6 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Application } from "./Application";
+import App from "./components/App";
+import { ContextProvider } from "./context";
+
 import "./style/index.sass";
 
-ReactDOM.render(<Application />, document.getElementById("root"));
+ReactDOM.render(
+  <ContextProvider>
+    <App />
+  </ContextProvider>,
+  document.getElementById("root")
+);
