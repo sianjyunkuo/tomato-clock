@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useMemo, memo } from "react";
+import classNames from "classnames";
+import cons from "../constants";
 
-const ConfigSection = () => {
-  return <div className="config-section">ConfigSection</div>;
+const ConfigSection = ({ currentNavContentId }) => {
+  const renderConfigSectionClass = useMemo(
+    () =>
+      classNames({
+        "config-section": true,
+        "is-open": currentNavContentId === cons.CONFIG_SECTION,
+      }),
+    [currentNavContentId]
+  );
+
+  return <div className={renderConfigSectionClass}>ConfigSection</div>;
 };
 
-export default ConfigSection;
+export default memo(ConfigSection);
