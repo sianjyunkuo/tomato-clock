@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 const Clock = ({
   isBell,
   isPlay,
+  isOpen,
   currentMission,
   time = 0,
   progress,
@@ -49,8 +50,17 @@ const Clock = ({
     return `${filteredMinute}:${filteredSecond}`;
   }, [time]);
 
+  const renderClockClass = useMemo(
+    () =>
+      classNames({
+        clock: true,
+        "is-open": isOpen,
+      }),
+    [isOpen]
+  );
+
   return (
-    <div className="clock">
+    <div className={renderClockClass}>
       <div className="clock-container">
         <svg
           className="clock-cycle-base"
@@ -88,6 +98,7 @@ const Clock = ({
 Clock.propTypes = {
   isBell: PropTypes.bool.isRequired,
   isPlay: PropTypes.bool.isRequired,
+  isOpen: PropTypes.bool.isRequired,
   currentMission: PropTypes.string.isRequired,
   time: PropTypes.number.isRequired,
   progress: PropTypes.number.isRequired,

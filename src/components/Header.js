@@ -1,12 +1,10 @@
-import React, { useState, useMemo, memo } from "react";
+import React, { useMemo, memo } from "react";
 import classNames from "classnames";
 
-const Header = () => {
-  const [isShow, setIsShow] = useState(false);
-
+const Header = ({ isOpen = false, onToggleMenu }) => {
   const renderHamburgerClass = useMemo(
-    () => classNames({ hamburger: true, "is-show": isShow }),
-    [isShow]
+    () => classNames({ hamburger: true, "is-open": isOpen }),
+    [isOpen]
   );
   return (
     <div className="header-section">
@@ -14,12 +12,7 @@ const Header = () => {
         <div className="logo"></div>
         <div className="slogan"></div>
       </div>
-      <div
-        className={renderHamburgerClass}
-        onClick={() => {
-          setIsShow((prevIsShow) => !prevIsShow);
-        }}
-      >
+      <div className={renderHamburgerClass} onClick={onToggleMenu}>
         <span className="line"></span>
         <span className="line"></span>
         <span className="line"></span>

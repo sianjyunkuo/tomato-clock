@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext, useRef, useMemo } from "react";
 import { ContextStore } from "../context";
-import Deco from "./Deco";
+import Deco from "./deco";
 import Header from "./Header";
 import AddMission from "./AddMission";
 import Clock from "./Clock";
@@ -17,6 +17,11 @@ const App = () => {
   const progressGapRef = useRef(
     Math.floor(cons.INIT_PROGRESS_VALUE / clockSetting.workingTime)
   );
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleToggleMenu = () => {
+    setIsOpen((prevIsOpen) => !prevIsOpen);
+  };
 
   const handleBtnPlay = () => {
     time > 0 &&
@@ -83,12 +88,13 @@ const App = () => {
 
   return (
     <div className="App">
-      <Deco />
-      <Header />
-      <AddMission />
+      <Deco isOpen={isOpen} />
+      <Header isOpen={isOpen} onToggleMenu={handleToggleMenu} />
+      <AddMission isOpen={isOpen} />
       <Clock
         isBell={isBell}
         isPlay={isPlay}
+        isOpen={isOpen}
         currentMission={currentMission.mission}
         time={time}
         progress={progress}

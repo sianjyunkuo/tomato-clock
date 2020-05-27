@@ -29,8 +29,14 @@
 
 .deco4
     right: 0
-    bottom: 182px
+    top: 50%
     width: 358px
     height: 716px
+    transform: translateY(-50%)
     background-image: url('../images/deco4.svg')
+    transition: all 1s
     @extend %deco
+    &is-open
+        width: 900px
+        height: 1800px
+        transform: translateY(-50%)
