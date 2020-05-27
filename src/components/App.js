@@ -30,6 +30,7 @@ const App = () => {
 
   const handleToggleMenu = () => {
     setIsOpen((prevIsOpen) => !prevIsOpen);
+    setCurrentNavContentId(() => (isOpen ? null : cons.LIST_SECTION));
   };
 
   const handleShowMenu = (navContentId) => {
@@ -91,14 +92,6 @@ const App = () => {
       isBell && console.log("BELL!");
     }
   }, [time, isBell, isPlay, currentMission, dispatch]);
-
-  useEffect(() => {
-    if (isOpen) {
-      setCurrentNavContentId(cons.LIST_SECTION);
-    } else {
-      setCurrentNavContentId(null);
-    }
-  }, [isOpen]);
 
   return (
     <div className="app">
