@@ -1,4 +1,10 @@
-import React, { useEffect, useState, useContext, useRef, useMemo } from "react";
+import React, {
+  useEffect,
+  useState,
+  useCallback,
+  useContext,
+  useRef,
+} from "react";
 import { ContextStore } from "../context";
 import Deco from "./deco";
 import Header from "./Header";
@@ -15,7 +21,7 @@ const App = () => {
   const [isBell, setIsBell] = useState(clockSetting.volume);
   const [progress, setIsProgress] = useState(cons.INIT_PROGRESS_VALUE);
   const [time, setTime] = useState(clockSetting.workingTime);
-  const [currentMissionId, setCurrentMissionId] = useState(missions[0].id);
+  const [currentMission, setCurrentMission] = useState(missions[0]);
   const progressGapRef = useRef(
     Math.floor(cons.INIT_PROGRESS_VALUE / clockSetting.workingTime)
   );
@@ -31,44 +37,36 @@ const App = () => {
     setCurrentNavContentId(navContentId);
   };
 
-  const handleBtnPlay = () => {
+  const handleBtnPlay = useCallback(() => {
     time > 0 &&
       !currentMission.isCompleted &&
       setIsPlay((prevIsPlay) => !prevIsPlay);
-  };
+  }, [time, currentMission.isCompleted]);
 
-  const handleBtnBell = () => {
+  const handleBtnBell = useCallback(() => {
     time > 0 &&
       !currentMission.isCompleted &&
       setIsBell((prevIsBell) => !prevIsBell);
-  };
+  }, [time, currentMission.isCompleted]);
 
-  const handleNextMission = () => {
+  const handleNextMission = useCallback(() => {
     clearInterval(window.TIMER);
 
     const missionsAmount = missions.length;
     const currentMissionIndex = missions.findIndex(
       (mission) => mission.id === currentMission.id
     );
-    dispatch({
-      type: cons.COMPLETE_MISSION,
-      missionId: currentMission.id,
-    });
-    if (currentMissionIndex === missionsAmount - 1) {
-      alert("Wonderful! Today The Missions Have Been Completed!");
+    const isLastMission = currentMissionIndex === missionsAmount - 1;
+    if (isLastMission) {
+      alert("You need to Add a New Mission!");
     } else {
       setIsPlay(false);
       setIsBell(clockSetting.volume);
       setIsProgress(cons.INIT_PROGRESS_VALUE);
       setTime(clockSetting.workingTime);
-      setCurrentMissionId(missions[currentMissionIndex + 1].id);
+      setCurrentMission(missions[currentMissionIndex + 1]);
     }
-  };
-
-  const currentMission = useMemo(
-    () => missions.find((mission) => mission.id === currentMissionId),
-    [missions, currentMissionId]
-  );
+  }, [clockSetting, missions, currentMission]);
 
   useEffect(() => {
     if (isPlay) {
