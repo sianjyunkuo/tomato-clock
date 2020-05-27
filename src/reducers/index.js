@@ -31,9 +31,13 @@ export const missionsReducer = (state, action) => {
 
 export const clockSettingReducer = (state, action) => {
   switch (action.type) {
-    case "TEST_CLOCK_SETTING":
-      console.log("TEST_CLOCK_SETTING");
-      return state;
+    case cons.UPDATE_WORKING_TIME:
+      const newClockSetting = {
+        ...state.clockSetting,
+        workingTime: action.workingTime * 60,
+      };
+      return { ...state, clockSetting: newClockSetting };
+
     default:
       return state;
   }

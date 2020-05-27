@@ -24,7 +24,7 @@ const initMissionsState = {
 
 const initClockSettingState = {
   clockSetting: {
-    workingTime: 5 * 60,
+    workingTime: 25 * 60,
     restingTime: 5 * 60,
     volume: true,
     audio: "basic",
