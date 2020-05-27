@@ -1,0 +1,40 @@
+%nav-btn
+    width: 62px
+    height: 62px
+    margin: 10px 0
+    border: 1px solid rgba(242,240,201,0.5)
+    border-radius: 50%
+    cursor: pointer
+    background-position: center
+    background-size: 35%
+    background-repeat: no-repeat
+    background-color: #BC2A35
+    &:hover
+        background-color: #D9343F
+    &.is-current
+        background-color: #D9343F
+
+.nav
+    position: absolute
+    top: 50%
+    right: 50px
+    margin-top: -139px
+    display: flex
+    justify-content: center
+    flex-direction: column
+    transition: all 1s
+    &.is-open
+        transform: translateX(-816px)
+
+.nav-list
+    @extend %nav-btn
+    background-image: url('../images/btn-list.svg')
+
+.nav-chart
+    @extend %nav-btn
+    background-image: url('../images/btn-chart.svg')
+
+.nav-config
+    @extend %nav-btn
+    background-size: 40%
+    background-image: url('../images/btn-config.svg')

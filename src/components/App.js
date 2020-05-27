@@ -4,6 +4,7 @@ import Deco from "./deco";
 import Header from "./Header";
 import AddMission from "./AddMission";
 import Clock from "./Clock";
+import Nav from "./Nav";
 import cons from "../constants";
 window.TIMER = null;
 
@@ -102,6 +103,7 @@ const App = () => {
         onBtnPlay={handleBtnPlay}
         onBtnNext={handleNextMission}
       />
+      <Nav isOpen={isOpen} />
     </div>
   );
 };
