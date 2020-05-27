@@ -23,7 +23,7 @@ const App = () => {
   const [time, setTime] = useState(clockSetting.workingTime);
   const [currentMission, setCurrentMission] = useState(missions[0]);
   const progressGapRef = useRef(
-    Math.floor(cons.INIT_PROGRESS_VALUE / clockSetting.workingTime)
+    cons.INIT_PROGRESS_VALUE / clockSetting.workingTime
   );
   const [isOpen, setIsOpen] = useState(false);
   const [currentNavContentId, setCurrentNavContentId] = useState(null);
