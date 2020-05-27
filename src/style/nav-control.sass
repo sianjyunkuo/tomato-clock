@@ -1,4 +1,4 @@
-%nav-btn
+%nav-control-btn
     width: 62px
     height: 62px
     margin: 10px 0
@@ -14,7 +14,7 @@
     &.is-current
         background-color: #D9343F
 
-.nav
+.nav-control
     position: absolute
     top: 50%
     right: 50px
@@ -26,15 +26,15 @@
     &.is-open
         transform: translateX(-816px)
 
-.nav-list
-    @extend %nav-btn
-    background-image: url('../images/btn-list.svg')
+    .btn-list
+        @extend %nav-control-btn
+        background-image: url('../images/btn-list.svg')
 
-.nav-chart
-    @extend %nav-btn
-    background-image: url('../images/btn-chart.svg')
+    .btn-chart
+        @extend %nav-control-btn
+        background-image: url('../images/btn-chart.svg')
 
-.nav-config
-    @extend %nav-btn
-    background-size: 40%
-    background-image: url('../images/btn-config.svg')
+    .btn-config
+        @extend %nav-control-btn
+        background-size: 40%
+        background-image: url('../images/btn-config.svg')
