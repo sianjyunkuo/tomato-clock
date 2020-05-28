@@ -31,12 +31,29 @@ export const missionsReducer = (state, action) => {
 
 export const clockSettingReducer = (state, action) => {
   switch (action.type) {
-    case cons.UPDATE_WORKING_TIME:
+    case cons.UPDATE_WORKING_TIME: {
       const newClockSetting = {
         ...state.clockSetting,
         workingTime: action.workingTime * 60,
       };
       return { ...state, clockSetting: newClockSetting };
+    }
+    case cons.UPDATE_RESTING_TIME: {
+      const newClockSetting = {
+        ...state.clockSetting,
+        restingTime: action.restingTime * 60,
+      };
+      return { ...state, clockSetting: newClockSetting };
+    }
+
+    case cons.UPDATE_VOLUME: {
+      return state;
+    }
+
+    case cons.UPDATE_AUDIO: {
+      const newClockSetting = { ...state.clockSetting, audio: action.audio };
+      return { ...state, clockSetting: newClockSetting };
+    }
 
     default:
       return state;

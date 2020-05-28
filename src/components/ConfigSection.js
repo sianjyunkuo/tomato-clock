@@ -1,4 +1,10 @@
-import React, { useState, useContext, memo, useEffect } from "react";
+import React, {
+  useState,
+  useContext,
+  memo,
+  useEffect,
+  useCallback,
+} from "react";
 import { ContextStore } from "../context";
 import cons from "../constants";
 import styled from "styled-components";
@@ -73,7 +79,6 @@ const OptionsPanel = styled.div`
   opacity: ${(props) => (props.isShow ? 1 : 0)};
   visibility: ${(props) => (props.isShow ? "visible" : "hidden")};
   max-height: ${(props) => (props.isShow ? "initial" : 0)};
-  transition: all 1s;
 `;
 
 const Option = styled.p`
@@ -88,17 +93,41 @@ const ConfigSection = ({ currentNavContentId }) => {
   const { clockSetting, dispatch } = useContext(ContextStore);
   const [isShowWorkingTime, setIsShowWorkingTime] = useState(false);
   const [isShowRestingTime, setIsShowRestingTime] = useState(false);
-
+  const [isShowAudio, setIsShowAudio] = useState(false);
   useEffect(() => {
     if (currentNavContentId !== cons.CONFIG_SECTION) {
       setIsShowWorkingTime(false);
+      setIsShowRestingTime(false);
+      setIsShowAudio(false);
     }
   }, [currentNavContentId]);
 
-  const handleWorkingTime = (workingTime) => {
-    dispatch({ type: cons.UPDATE_WORKING_TIME, workingTime });
-    setIsShowWorkingTime(false);
-  };
+  const handleWorkingTime = useCallback(
+    (workingTime) => {
+      dispatch({
+        type: cons.UPDATE_WORKING_TIME,
+        workingTime,
+      });
+      setIsShowWorkingTime(false);
+    },
+    [dispatch]
+  );
+
+  const handleRestingTime = useCallback(
+    (restingTime) => {
+      dispatch({ type: cons.UPDATE_RESTING_TIME, restingTime });
+      setIsShowRestingTime(false);
+    },
+    [dispatch]
+  );
+
+  const handleAudio = useCallback(
+    (audio) => {
+      dispatch({ type: cons.UPDATE_AUDIO, audio });
+      setIsShowAudio(false);
+    },
+    [dispatch]
+  );
 
   return (
     <StyledConfigSection isOpen={currentNavContentId === cons.CONFIG_SECTION}>
@@ -138,17 +167,49 @@ const ConfigSection = ({ currentNavContentId }) => {
               setIsShowRestingTime((prevIsShow) => !prevIsShow);
             }}
           >
-            5 min
+            {clockSetting.restingTime / 60} min
           </ItemValue>
           <OptionsPanel isShow={isShowRestingTime}>
-            <Option>3 min</Option>
-            <Option>5 min</Option>
-            <Option>10 min</Option>
+            {cons.RESTING_TIME_OPTIONS.map(({ id, restingTime }) => (
+              <Option
+                key={id}
+                isSelected={isShowRestingTime}
+                onClick={() => {
+                  handleRestingTime(restingTime);
+                }}
+              >
+                {restingTime} min
+              </Option>
+            ))}
           </OptionsPanel>
         </ConfigItem>
       </ConfigSetting>
       <ConfigSetting>
         <ConfigTitle>Alarm</ConfigTitle>
+        <ConfigItem>
+          <ItemLabel>Audio</ItemLabel>
+          <ItemValue
+            isSelected={isShowAudio}
+            onClick={() => {
+              setIsShowAudio((prevIsShow) => !prevIsShow);
+            }}
+          >
+            {clockSetting.audio}
+          </ItemValue>
+          <OptionsPanel isShow={isShowAudio}>
+            {cons.AUDIO_OPTIONS.map(({ id, audio }) => (
+              <Option
+                key={id}
+                isSelected={isShowAudio}
+                onClick={() => {
+                  handleAudio(audio);
+                }}
+              >
+                {audio}
+              </Option>
+            ))}
+          </OptionsPanel>
+        </ConfigItem>
       </ConfigSetting>
     </StyledConfigSection>
   );
