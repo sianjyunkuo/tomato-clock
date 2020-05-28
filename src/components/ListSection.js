@@ -11,6 +11,16 @@ import { ContextStore } from "../context";
 import classNames from "classnames";
 import cons from "../constants";
 import moment from "moment";
+import {
+  StyledListSection,
+  AddMissionInputWrapper,
+  AddMissionInput,
+  BtnAddMission,
+  TableList,
+  TableListHead,
+  TableListBody,
+  MissionItem,
+} from "../style/ListSection";
 
 const ListSection = ({ currentNavContentId }) => {
   const { missions, dispatch } = useContext(ContextStore);
@@ -40,14 +50,10 @@ const ListSection = ({ currentNavContentId }) => {
   );
 
   return (
-    <div className={renderListSectionClass}>
-      <div className="add-mission-input-wrapper">
-        <input
-          className="add-mission-input"
-          type="text"
-          placeholder="Add a new mission..."
+    <StyledListSection isOpen={currentNavContentId === cons.LIST_SECTION}>
+      <AddMissionInputWrapper>
+        <AddMissionInput
           value={newMission}
-          maxLength={35}
           onChange={(e) => {
             setMission(e.target.value);
           }}
@@ -55,27 +61,20 @@ const ListSection = ({ currentNavContentId }) => {
             e.key === "Enter" && handleAddMission();
           }}
         />
-        <div className="btn-add-mission" onClick={handleAddMission}></div>
-      </div>
-      <div className="table-list">
-        <div className="table-list-head">{todayDateRef.current}</div>
-        <div className="table-list-body">
-          {missions.map((mission) => {
-            return (
-              <div
-                key={mission.id}
-                className={classNames({
-                  "mission-item": true,
-                  "is-completed": mission.isCompleted,
-                })}
-              >
-                {mission.mission}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </div>
+        <BtnAddMission onClick={handleAddMission} />
+      </AddMissionInputWrapper>
+
+      <TableList>
+        <TableListHead>{todayDateRef.current}</TableListHead>
+        <TableListBody>
+          {missions.map((mission) => (
+            <MissionItem key={mission.id} iscompleted={mission.iscompleted}>
+              {mission.mission}
+            </MissionItem>
+          ))}
+        </TableListBody>
+      </TableList>
+    </StyledListSection>
   );
 };
 
