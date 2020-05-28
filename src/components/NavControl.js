@@ -1,63 +1,31 @@
-import React, { memo, useMemo } from "react";
-import classNames from "classnames";
+import React, { memo } from "react";
 import cons from "../constants";
+import {
+  StyledNavControl,
+  BtnList,
+  BtnChart,
+  BtnConfig,
+} from "../style/NavControl";
 
 const NavControl = ({ isOpen = false, currentNavContentId, onShowMenu }) => {
   const handleNavBtn = (navContentId) => {
     onShowMenu(navContentId);
   };
-
-  const renderNavControlClass = useMemo(
-    () =>
-      classNames({
-        "nav-control": true,
-        "is-open": isOpen,
-      }),
-    [isOpen]
-  );
-
-  const renderBtnListClass = useMemo(
-    () =>
-      classNames({
-        "btn-list": true,
-        "is-current": currentNavContentId === cons.LIST_SECTION,
-      }),
-    [currentNavContentId]
-  );
-
-  const renderBtnChartClass = useMemo(
-    () =>
-      classNames({
-        "btn-chart": true,
-        "is-current": currentNavContentId === cons.CHART_SECTION,
-      }),
-    [currentNavContentId]
-  );
-
-  const renderBtnConfigClass = useMemo(
-    () =>
-      classNames({
-        "btn-config": true,
-        "is-current": currentNavContentId === cons.CONFIG_SECTION,
-      }),
-    [currentNavContentId]
-  );
-
   return (
-    <nav className={renderNavControlClass}>
-      <div
-        className={renderBtnListClass}
+    <StyledNavControl isOpen={isOpen}>
+      <BtnList
+        isCurrent={currentNavContentId === cons.LIST_SECTION}
         onClick={() => handleNavBtn(cons.LIST_SECTION)}
-      ></div>
-      <div
-        className={renderBtnChartClass}
+      />
+      <BtnChart
+        isCurrent={currentNavContentId === cons.CHART_SECTION}
         onClick={() => handleNavBtn(cons.CHART_SECTION)}
-      ></div>
-      <div
-        className={renderBtnConfigClass}
+      />
+      <BtnConfig
+        isCurrent={currentNavContentId === cons.CONFIG_SECTION}
         onClick={() => handleNavBtn(cons.CONFIG_SECTION)}
-      ></div>
-    </nav>
+      />
+    </StyledNavControl>
   );
 };
 
