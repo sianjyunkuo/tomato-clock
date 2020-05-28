@@ -8,7 +8,7 @@ export const StyledChartSection = styled.div`
   height: 700px;
   transform: ${(props) =>
     props.isOpen ? "translateX(0)" : "translateX(680px)"};
-  transition: all 1s;
+  transition: transform 1s;
 `;
 
 export const MissionResult = styled.div`

@@ -11,7 +11,7 @@ export const StyledConfigSection = styled.div`
   box-sizing: border-box;
   transform: ${(props) =>
     props.isOpen ? "translateX(0)" : "translateX(680px)"};
-  transition: all 1s;
+  transition: transform 1s;
 `;
 
 export const ConfigSetting = styled.div`
@@ -85,7 +85,7 @@ export const ItemRadioValue = styled.div`
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    transition: all 0.6s;
+    transition: left 0.6s;
     background-color: #d9343f;
   }
 `;
