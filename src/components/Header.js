@@ -1,23 +1,28 @@
-import React, { useMemo, memo } from "react";
-import classNames from "classnames";
+import React, { memo } from "react";
+import {
+  StyledHeaderSection,
+  Hamburger,
+  LogoItem,
+  Logo,
+  Slogan,
+  Line1,
+  Line2,
+  Line3,
+} from "../style/Header";
 
 const Header = ({ isOpen = false, onToggleMenu }) => {
-  const renderHamburgerClass = useMemo(
-    () => classNames({ hamburger: true, "is-open": isOpen }),
-    [isOpen]
-  );
   return (
-    <div className="header-section">
-      <div className="logo-item">
-        <div className="logo"></div>
-        <div className="slogan"></div>
-      </div>
-      <div className={renderHamburgerClass} onClick={onToggleMenu}>
-        <span className="line"></span>
-        <span className="line"></span>
-        <span className="line"></span>
-      </div>
-    </div>
+    <StyledHeaderSection>
+      <LogoItem>
+        <Logo />
+        <Slogan />
+      </LogoItem>
+      <Hamburger onClick={onToggleMenu}>
+        <Line1 isOpen={isOpen} />
+        <Line2 isOpen={isOpen} />
+        <Line3 isOpen={isOpen} />
+      </Hamburger>
+    </StyledHeaderSection>
   );
 };
 
