@@ -44,7 +44,7 @@ const ItemLabel = styled.span`
   color: #f2f0c9;
 `;
 
-const ItemValue = styled.div`
+const ItemSelectValue = styled.div`
   position: absolute;
   right: 12px;
   top: 16px;
@@ -79,6 +79,37 @@ const OptionsPanel = styled.div`
   opacity: ${(props) => (props.isShow ? 1 : 0)};
   visibility: ${(props) => (props.isShow ? "visible" : "hidden")};
   max-height: ${(props) => (props.isShow ? "initial" : 0)};
+`;
+const ItemRadioValue = styled.div`
+  position: absolute;
+  right: 12px;
+  top: 16px;
+  width: 80px;
+  height: 30px;
+  border-radius: 15px;
+  cursor: pointer;
+  background-color: #f2f0c9;
+  &::before {
+    content: ${(props) => `"${props.isOn ? "on" : "off"}"`};
+    position: absolute;
+    left: ${(props) => (props.isOn ? "38px" : "10px")};
+    top: 4px;
+    line-height: 1;
+    letter-spacing: 2px;
+    font-size: 20px;
+    color: ${(props) => (props.isOn ? "#bc2b35" : "#c1c0a0")};
+  }
+  &::after {
+    position: absolute;
+    left: ${(props) => (props.isOn ? "5px" : "50px")};
+    top: 3px;
+    content: "";
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    transition: all 0.6s;
+    background-color: #d9343f;
+  }
 `;
 
 const Option = styled.p`
@@ -136,14 +167,14 @@ const ConfigSection = ({ currentNavContentId }) => {
         <ConfigItem>
           <ItemLabel>Working time</ItemLabel>
 
-          <ItemValue
+          <ItemSelectValue
             isSelected={isShowWorkingTime}
             onClick={() => {
               setIsShowWorkingTime((prevIsShow) => !prevIsShow);
             }}
           >
             {clockSetting.workingTime / 60} min
-          </ItemValue>
+          </ItemSelectValue>
 
           <OptionsPanel isShow={isShowWorkingTime}>
             {cons.WORKING_TIME_OPTIONS.map(({ id, workingTime }) => (
@@ -161,14 +192,14 @@ const ConfigSection = ({ currentNavContentId }) => {
         </ConfigItem>
         <ConfigItem>
           <ItemLabel>Resting time</ItemLabel>
-          <ItemValue
+          <ItemSelectValue
             isSelected={isShowRestingTime}
             onClick={() => {
               setIsShowRestingTime((prevIsShow) => !prevIsShow);
             }}
           >
             {clockSetting.restingTime / 60} min
-          </ItemValue>
+          </ItemSelectValue>
           <OptionsPanel isShow={isShowRestingTime}>
             {cons.RESTING_TIME_OPTIONS.map(({ id, restingTime }) => (
               <Option
@@ -187,15 +218,27 @@ const ConfigSection = ({ currentNavContentId }) => {
       <ConfigSetting>
         <ConfigTitle>Alarm</ConfigTitle>
         <ConfigItem>
+          <ItemLabel>Volume</ItemLabel>
+          <ItemRadioValue
+            isOn={clockSetting.volume}
+            onClick={() => {
+              dispatch({
+                type: cons.UPDATE_VOLUME,
+                volume: !clockSetting.volume,
+              });
+            }}
+          ></ItemRadioValue>
+        </ConfigItem>
+        <ConfigItem>
           <ItemLabel>Audio</ItemLabel>
-          <ItemValue
+          <ItemSelectValue
             isSelected={isShowAudio}
             onClick={() => {
               setIsShowAudio((prevIsShow) => !prevIsShow);
             }}
           >
             {clockSetting.audio}
-          </ItemValue>
+          </ItemSelectValue>
           <OptionsPanel isShow={isShowAudio}>
             {cons.AUDIO_OPTIONS.map(({ id, audio }) => (
               <Option

@@ -8,6 +8,7 @@ const cons = {
   UPDATE_WORKING_TIME: "tomato-click/UPDATE_WORKING_TIME",
   UPDATE_RESTING_TIME: "tomato-click/UPDATE_RESTING_TIME",
   UPDATE_AUDIO: "tomato-click/UPDARE_AUDIO",
+  UPDATE_VOLUME: "tomato-click/UPDATE_VOLUME",
   WORKING_TIME_OPTIONS: [
     {
       id: 1,

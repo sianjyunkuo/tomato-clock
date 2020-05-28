@@ -47,7 +47,8 @@ export const clockSettingReducer = (state, action) => {
     }
 
     case cons.UPDATE_VOLUME: {
-      return state;
+      const newClockSetting = { ...state.clockSetting, volume: action.volume };
+      return { ...state, clockSetting: newClockSetting };
     }
 
     case cons.UPDATE_AUDIO: {
