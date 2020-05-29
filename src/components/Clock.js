@@ -25,7 +25,7 @@ const Clock = ({
   const renderBtnBellClass = useMemo(
     () =>
       classNames({
-        "btn-play": true,
+        "btn-bell": true,
         "is-off-bell": !isBell,
       }),
     [isBell]
