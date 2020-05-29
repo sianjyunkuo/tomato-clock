@@ -1,0 +1,36 @@
+{
+  "files": {
+    "main.css": "/tomato-clock/static/css/main.d9042e10.chunk.css",
+    "main.js": "/tomato-clock/static/js/main.fbf84cc0.chunk.js",
+    "main.js.map": "/tomato-clock/static/js/main.fbf84cc0.chunk.js.map",
+    "runtime-main.js": "/tomato-clock/static/js/runtime-main.04aa8bff.js",
+    "runtime-main.js.map": "/tomato-clock/static/js/runtime-main.04aa8bff.js.map",
+    "static/js/2.1a668a9b.chunk.js": "/tomato-clock/static/js/2.1a668a9b.chunk.js",
+    "static/js/2.1a668a9b.chunk.js.map": "/tomato-clock/static/js/2.1a668a9b.chunk.js.map",
+    "index.html": "/tomato-clock/index.html",
+    "precache-manifest.b419ca79384eebf99c7b284fd6200995.js": "/tomato-clock/precache-manifest.b419ca79384eebf99c7b284fd6200995.js",
+    "service-worker.js": "/tomato-clock/service-worker.js",
+    "static/css/main.d9042e10.chunk.css.map": "/tomato-clock/static/css/main.d9042e10.chunk.css.map",
+    "static/js/2.1a668a9b.chunk.js.LICENSE.txt": "/tomato-clock/static/js/2.1a668a9b.chunk.js.LICENSE.txt",
+    "static/media/btn-arrow-down.svg": "/tomato-clock/static/media/btn-arrow-down.06d01a2d.svg",
+    "static/media/index.sass": "/tomato-clock/static/media/btn-unbell.e9bfaab1.svg",
+    "static/media/btn-chart.svg": "/tomato-clock/static/media/btn-chart.a9fd689d.svg",
+    "static/media/btn-config.svg": "/tomato-clock/static/media/btn-config.1dcf41a3.svg",
+    "static/media/btn-list.svg": "/tomato-clock/static/media/btn-list.6fda9928.svg",
+    "static/media/checkbox-checked.svg": "/tomato-clock/static/media/checkbox-checked.15731e7b.svg",
+    "static/media/checkbox-default.svg": "/tomato-clock/static/media/checkbox-default.41642f4d.svg",
+    "static/media/deco1.svg": "/tomato-clock/static/media/deco1.be8c80d1.svg",
+    "static/media/deco2.svg": "/tomato-clock/static/media/deco2.4469f783.svg",
+    "static/media/deco3.svg": "/tomato-clock/static/media/deco3.d78d8d4b.svg",
+    "static/media/deco4.svg": "/tomato-clock/static/media/deco4.c58bf59c.svg",
+    "static/media/icon-calendar.svg": "/tomato-clock/static/media/icon-calendar.35e51919.svg",
+    "static/media/logo.svg": "/tomato-clock/static/media/logo.2017da30.svg",
+    "static/media/slogan.svg": "/tomato-clock/static/media/slogan.94621486.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.04aa8bff.js",
+    "static/js/2.1a668a9b.chunk.js",
+    "static/css/main.d9042e10.chunk.css",
+    "static/js/main.fbf84cc0.chunk.js"
+  ]
+}
