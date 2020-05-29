@@ -85,6 +85,7 @@ const Clock = ({
           ></circle>
         </svg>
         <h1 className="current-mission">{currentMission}</h1>
+        <div className="time">{renderTime}</div>
         <div className="control-bar">
           <div className={renderBtnBellClass} onClick={onBtnBell}></div>
           <div className={renderBtnPlayClass} onClick={onBtnPlay}></div>

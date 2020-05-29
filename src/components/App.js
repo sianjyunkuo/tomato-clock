@@ -6,7 +6,7 @@ import React, {
   useRef,
 } from "react";
 import { ContextStore } from "../context";
-import Deco from "./deco";
+import Deco from "./Deco";
 import Header from "./Header";
 import AddMission from "./AddMission";
 import Clock from "./Clock";
