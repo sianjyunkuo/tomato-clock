@@ -2,7 +2,7 @@
 
 - Built tomato clock web by using React,Redux,Hook,styled-component,sass. 
 
-- AvoidedHOCwrapperhell,codereusable,andcleanercodebyusingHook.
+- Avoided HOC wrapper hell, code reusable, and cleaner code by using Hook.
 
 - Play at: https://sianjyunkuo.github.io/tomato-clock/
 
