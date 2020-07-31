@@ -12,4 +12,4 @@
 
 ## Demo
 
-![image]()
+![image](https://github.com/sianjyunkuo/tomato-clock/blob/master/tomato%20clock%20demo.gif)
